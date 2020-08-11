@@ -29,10 +29,10 @@ const sharedRoomSchema = new mongoose.Schema({
     finish:{
         type:Date,
         required:true
+    },
+    owner:{
+        type:String,
+        required:true
     }
-
-
-
-
 })
 module.exports = mongoose.model('SharedRoom',sharedRoomSchema)
