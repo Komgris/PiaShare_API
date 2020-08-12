@@ -3,6 +3,11 @@ const SharedRoom = require('../model/SharedRoomModel');
 const jwt = require('jsonwebtoken');
 const { sharedRoomValidation } = require('../validate/validation');
 
+router.get('/get/:owner', async(req, res)=> {
+    req.params.owner = jwt.verify(req.params.owner,process.env.TOKEN)._id
+    const result = await SharedRoom.find(req.params)
+    return res.status(200).send(result);
+})
 router.post('/create', async(req,res)=>{
 
     const {error} = sharedRoomValidation(req.body);
