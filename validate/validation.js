@@ -28,6 +28,16 @@ const sharedRoomValidation = data =>{
     });
     return schema.validate(data);
 };
+
+const profileValidate = data =>{
+    const schema = Joi.object({
+        name: Joi.string().min(3).required(),
+        systemId: Joi.string().min(1).required()
+    });
+    return schema.validate(data);
+};
+
 module.exports.registerValidation = registerValidation;
 module.exports.logInValidation = logInValidation;
 module.exports.sharedRoomValidation = sharedRoomValidation;
+module.exports.profileValidate = profileValidate;
