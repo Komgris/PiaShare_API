@@ -8,6 +8,10 @@ router.get('/get/:owner', async(req, res)=> {
     const result = await SharedRoom.find(req.params)
     return res.status(200).send(result);
 })
+router.get('/find/:keyword', async(req, res)=>{
+    const result = await SharedRoom.find({name: { $regex: '.*' + req.params.keyword + '.*' } });
+    return res.status(200).send(result);
+})
 router.post('/create', async(req,res)=>{
 
     const {error} = sharedRoomValidation(req.body);

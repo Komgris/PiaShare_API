@@ -7,6 +7,7 @@ const postRoute = require('./routes/post');
 const sharedRoute = require('./routes/shared');
 const profileRoute = require('./routes/profile');
 const cors = require('cors');
+const socketio = require('socket.io')
 
 dotenv.config();
 
@@ -24,5 +25,24 @@ app.use('/api/post', postRoute)
 app.use('/api/shared', sharedRoute)
 app.use('/api/profile', profileRoute)
 
-app.listen(4200, () => console.log('Server Run'));
+const server = app.listen(4200, () => console.log('Server Run'));
+
+const io = socketio.listen(server);
+
+io.on('connection', (socket) => {
+    console.log(`Connected: ${socket.id}`);
+
+    socket.on('disconnect', () =>
+       console.log(`Disconnected: ${socket.id}`));
+       
+    socket.on('join', (room) => {
+       console.log(`Socket ${socket.id} joining ${room}`);
+       socket.join(room);
+    });
+    socket.on('chat', (data) => {
+       const { message, room } = data;
+       console.log(`msg: ${message}, room: ${room}`);
+       io.to(room).emit('chat', message);
+    });
+ });
 
