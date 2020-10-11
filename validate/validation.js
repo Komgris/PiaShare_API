@@ -37,7 +37,27 @@ const profileValidate = data =>{
     return schema.validate(data);
 };
 
+const requestRoomValidation = data =>{
+    const schema = Joi.object({
+        userId: Joi.string().min(1).required(),
+        roomId: Joi.string().min(1).required(),
+        isAccept: Joi.bool().required()
+    });
+    return schema.validate(data);
+};
+
+const userRoomValidation = data =>{
+    const schema = Joi.object({
+        userId: Joi.string().min(1).required(),
+        roomId: Joi.string().min(1).required(),
+        isOwner: Joi.bool().required()
+    })
+    return schema.validate(data);
+}
+
+module.exports.userRoomValidation = userRoomValidation;
 module.exports.registerValidation = registerValidation;
 module.exports.logInValidation = logInValidation;
 module.exports.sharedRoomValidation = sharedRoomValidation;
 module.exports.profileValidate = profileValidate;
+module.exports.requestRoomValidation = requestRoomValidation;

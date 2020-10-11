@@ -8,8 +8,8 @@ const profileSchema = new mongoose.Schema({
         max:255
     },
     systemId:{
-        type: String,
-        required: true,
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"users"
     }
 })
 module.exports = mongoose.model('Profile', profileSchema)
