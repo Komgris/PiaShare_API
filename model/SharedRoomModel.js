@@ -31,8 +31,8 @@ const sharedRoomSchema = new mongoose.Schema({
         required:true
     },
     owner:{
-        type:String,
-        required:true
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"users"
     }
 })
 module.exports = mongoose.model('SharedRoom',sharedRoomSchema)
