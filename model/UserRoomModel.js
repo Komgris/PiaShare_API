@@ -11,7 +11,7 @@ const userRoomSchema = new mongoose.Schema({
         required: true,
     },
     isOwner:{
-        type:boolean,
+        type: Boolean,
         required: true,
     }
 });
